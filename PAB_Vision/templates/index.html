@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="shortcut icon" href="{{url_for('static' , filename = './Assets/favicon.ico')}}" />
+    <title>PAB-Vision</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="{{url_for('static' , filename = 'personalJS.js')}}"></script>
+	<link rel="Stylesheet" href = "{{url_for('static' , filename = 'style.css')}}">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id = "parent-app">
+	<!-- The Modal -->
+	<div class="modal show" id="myModal" style = "display: none;" aria-modal="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Loading ...</h4>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="spinner-grow text-primary"></div>
+			</div>
+			
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container-fluid h-100 mt-5">
+			<div class="row justify-content-center h-100">
+				<div class="col-md-8 col-xl-6 chat">
+					<div class="card">
+						<div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont" style="left:45%">
+									<img src="{{url_for('static' , filename = './Assets/logo_light.jpeg')}}" class="rounded-circle user_img">
+								</div>
+							</div>
+						</div>
+						<div class="card-body msg_card_body">
+							<!--
+							<div class="d-flex justify-content-start mb-4">
+								<div class="img_cont_msg">
+									<img src="{{url_for('static' , filename = './Assets/bot_logo.png')}}" class="rounded-circle user_img_msg">
+								</div>
+								<div class="msg_cotainer">
+									Hi, how are you samim?
+									<span class="msg_time">8:40 AM, Today</span>
+								</div>
+							</div>
+							<div class="d-flex justify-content-end mb-4">
+								<div class="msg_cotainer_send">
+									Hi Maryam i am good tnx how about you?
+									<span class="msg_time_send">8:55 AM, Today</span>
+								</div>
+								<div class="img_cont_msg">
+									<img src="{{url_for('static' , filename = './Assets/user_logo.png')}}" class="rounded-circle user_img_msg">
+								</div>
+							</div>
+							-->
+						</div>
+						<div class="card-footer">
+							<div class="input-group">
+								<textarea id="msgBox" name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+								<div class="input-group-append" onclick="sendMessage()">
+									<span class="input-group-text send_btn"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--		Vue Script Starts			-->
+
+	<script>
+		import Chat from 'vue-beautiful-chat'
+		Vue.use(Chat)
+
+		var app = new Vue({
+			delimiters: ['[[', ']]'],
+			el: '#parent-app',
+			data() {
+				return {
+					agentProfile: {
+						teamName: 'Vue Beautiful Chat',
+						imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+					},
+					messageList: [],
+					newMessagesCount: 0,
+					isChatOpen: true
+				}
+			},
+			methods: {
+				sendMessage (msg) {
+					if (text.length > 0) {
+						this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
+						this.messageList.push(msg)
+					}
+				},
+				onMessageWasSent (msg) {
+					this.messageList.push(msg)
+				},
+				openChat () {
+					this.isChatOpen = true
+					this.newMessagesCount = 0
+				},
+				closeChat () {
+					this.isChatOpen = false
+				}
+			}
+		})
+	</script>
+</body>
+</html>
